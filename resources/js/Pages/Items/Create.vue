@@ -1,8 +1,8 @@
 <script setup>
 import FlashMessage from "@/Components/FlashMessage.vue";
+import ValidationErrors from "@/Components/ValidationErrors.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Inertia } from "@inertiajs/inertia";
-import { Head } from "@inertiajs/inertia-vue3";
+import { Head, router } from "@inertiajs/vue3";
 import { defineProps, reactive } from "vue";
 
 defineProps({
@@ -16,7 +16,12 @@ const form = reactive({
 });
 
 const storeItem = () => {
-  Inertia.post("/items", form);
+  // Inertia.post("/items", form);
+  router.visit(`/items`, {
+    method: 'post',
+    data: form
+  }
+  )
 };
 </script>
 

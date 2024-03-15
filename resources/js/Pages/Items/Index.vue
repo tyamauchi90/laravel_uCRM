@@ -1,6 +1,6 @@
 <script setup lang="js">
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link } from "@inertiajs/inertia-vue3";
+import { Head, Link } from "@inertiajs/vue3";
 
 defineProps({
   items: Array,

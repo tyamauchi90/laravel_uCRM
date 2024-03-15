@@ -1,7 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Inertia } from "@inertiajs/inertia";
-import { Head, Link } from "@inertiajs/inertia-vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
 import { defineProps } from "vue";
 
 defineProps({
@@ -9,7 +8,10 @@ defineProps({
 });
 
 const deleteItem = (id) => {
-  Inertia.delete(route('items.destroy', { item: id }), {
+  // Inertia.delete(route('items.destroy', { item: id }), {
+  //   onBefore: () => confirm('本当に削除しますか？')
+  // })
+  router.delete(`/items/${id}`, {
     onBefore: () => confirm('本当に削除しますか？')
   })
 }

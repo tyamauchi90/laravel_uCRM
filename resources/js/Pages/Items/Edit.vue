@@ -1,11 +1,12 @@
 <script setup>
 import FlashMessage from "@/Components/FlashMessage.vue";
+import ValidationErrors from "@/Components/ValidationErrors.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Inertia } from "@inertiajs/inertia";
-import { Head } from "@inertiajs/inertia-vue3";
+import { Head, router } from "@inertiajs/vue3";
 import { defineProps, reactive } from "vue";
 
 const props = defineProps({
+  errors: Object,
   item: Object,
 });
 
@@ -18,7 +19,12 @@ const form = reactive({
 });
 
 const updateItem = (id) => {
-  Inertia.put(route('items.update', { item: id }), form);
+  // Inertia.put(route('items.update', { item: id }), form);
+  router.visit(`/items/${id}/`, {
+    method: 'put',
+    data: form
+  }
+  )
 };
 </script>
 
