@@ -5,7 +5,10 @@ const props = defineProps({
   errors: Object,
 });
 
-const hasErrors = computed(() => Object.keys(props.errors).length > 0);
+const hasErrors = computed(() =>
+  // Object.keys(props.errors).length > 0
+  props.errors !== null && props.errors !== undefined && Object.keys(props.errors).length > 0
+);
 
 </script>
 

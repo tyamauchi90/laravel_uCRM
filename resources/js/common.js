@@ -1,8 +1,17 @@
-const nl2br = (str) => {
-  let res = str.replace(/\r\n/g, "<br>");//（Carriage Return + Line Feed）Windows形式の改行文字
-  res = res.replace(/\n|\r/g, "<br>"); //(Line FeedまたはCarriage Return）UnixやMac形式の改行文字
-  return res;
-};
+// const nl2br = (str) => {
+//   let res = str.replace(/\r\n/g, "<br>");//（Carriage Return + Line Feed）Windows形式の改行文字
+//   res = res.replace(/\n|\r/g, "<br>"); //(Line FeedまたはCarriage Return）UnixやMac形式の改行文字
+//   return res;
+// };
 
-export { nl2br };
+// export { nl2br };
 
+const getToday = () => {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = ("0" + (today.getMonth() + 1)).slice(-2);
+  const dd = ("0" + today.getDate()).slice(-2);
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+export { getToday };
