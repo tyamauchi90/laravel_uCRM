@@ -1,5 +1,4 @@
 <script setup>
-import axios from "axios";
 import { reactive, ref } from "vue";
 
 const search = ref('');
@@ -16,18 +15,40 @@ const toggleStatus = () => {
   isShow.value = !isShow.value
 }
 
+// const searchCustomers = async () => {
+//   try {
+//     await axios.get(`/api/searchCustomers/?search=${search.value}`)
+//       .then(res => {
+//         console.log(res.data);
+//         customers.value = res.data;
+//       })
+//     toggleStatus();
+//   } catch (e) {
+//     console.log(e)
+//   }
+// }
+
 const searchCustomers = async () => {
   try {
-    await axios.get(`/api/searchCustomers/?search=${search.value}`)
-      .then(res => {
-        console.log(res.data);
-        customers.value = res.data;
-      })
+    // リクエストヘッダーにAcceptを追加
+    const response = await fetch(`/api/searchCustomers/?search=${search.value}`, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    if (!response.ok) {
+      throw new Error('ネットワークレスポンスが正常ではありません。');
+    }
+    const data = await response.json();
+    console.log(data);
+    customers.value = data;
     toggleStatus();
   } catch (e) {
-    console.log(e)
+    console.error('エラーが発生しました:', e);
   }
 }
+
+
 
 const emit = defineEmits(['update:customerId']);
 
